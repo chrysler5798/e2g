@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">E2G</string>
+
+    <string-array name="menu_arrays">
+        <item>ACCUEIL</item>
+        <item>ASSOCIATION</item>
+        <item>EVENEMENTS</item>
+        <item>PARTENAIRES</item>
+        <item>LE CLUB E2G</item>
+        <item>SERVICES</item>
+        <item>EQUIPES</item>
+        <item>PROGRAMME TV 7J/7</item>
+        <item>GALERIES</item>
+        <item>CONTACT</item>
+    </string-array>
+
+    <string name="drawer_open">Ouvrir</string>
+    <string name="drawer_close">Fermer</string>
+
+    <string name="apropos">A propos</string>
+</resources>
