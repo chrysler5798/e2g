@@ -14,48 +14,57 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/colorAccent"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:id="@+id/loader" />
+    </RelativeLayout>
+
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <RelativeLayout
-            android:id="@+id/content_frame"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <WebView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/webView1"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                tools:ignore="RtlHardcoded" />
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:id="@+id/loadingPanel"
+                android:id="@+id/content_frame"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center" >
+                android:layout_height="match_parent">
 
-                <ProgressBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:indeterminate="true"
-                    android:indeterminateTint="@color/colorAccent"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"/>
+                <WebView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/webView1"
+                    tools:ignore="RtlHardcoded" />
             </RelativeLayout>
-        </RelativeLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <ListView android:id="@+id/left_drawer"
-                android:layout_width="240dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="start"
-                android:choiceMode="singleChoice"
-                android:background="#666666"
-                android:divider="#FFFFFF"
-                android:dividerHeight="1dp"/>
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:choiceMode="singleChoice"
+            android:background="#666666"
+            android:divider="#FFFFFF"
+            android:dividerHeight="1dp"/>
     </android.support.v4.widget.DrawerLayout>
 
 </LinearLayout>

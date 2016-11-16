@@ -16,13 +16,15 @@ import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
+import android.widget.ProgressBar;
 
 
 public class MainActivity extends AppCompatActivity
 {
 
     WebView firstWeb;
+
+    SwipeRefreshLayout mySwipeRefresh;
 
     final String FACEBOOK_URL = "https://www.facebook.com/assoc.eventtogive";
     final String TWITTER_URL = "https://twitter.com/Event2Give";
@@ -59,20 +61,20 @@ public class MainActivity extends AppCompatActivity
         {
             @Override
             public void onPageCommitVisible(WebView view, String url) {
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
                 firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('container clearfix')[0].style.display = 'none'; " + "})()");
+                firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
                 //firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
-
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
+                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             }
 
             @Override
@@ -90,6 +92,16 @@ public class MainActivity extends AppCompatActivity
         });
 
         firstWeb.loadUrl("http://www.event-to-give.com/");
+
+        mySwipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+
+        mySwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                firstWeb.reload();
+                mySwipeRefresh.setRefreshing(false);
+            }
+        });
     }
 
 
