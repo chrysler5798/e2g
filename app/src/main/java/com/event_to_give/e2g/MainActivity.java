@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity
 {
 
     WebView firstWeb;
+
+    SwipeRefreshLayout swipeLayout;
 
     final String FACEBOOK_URL = "https://www.facebook.com/assoc.eventtogive";
     final String TWITTER_URL = "https://twitter.com/Event2Give";
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onPageCommitVisible(WebView view, String url) {
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                swipeLayout.setNestedScrollingEnabled(true);
                 firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('container clearfix')[0].style.display = 'none'; " + "})()");
                 //firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
             }
@@ -88,6 +92,15 @@ public class MainActivity extends AppCompatActivity
         });
 
         firstWeb.loadUrl("http://www.event-to-give.com/");
+
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipeToRefresh);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Insert your code here
+                firstWeb.reload(); // refreshes the WebView
+            }
+        });
     }
 
 
