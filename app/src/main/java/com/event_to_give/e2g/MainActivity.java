@@ -16,7 +16,6 @@ import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 
 
 public class MainActivity extends AppCompatActivity
@@ -61,6 +60,7 @@ public class MainActivity extends AppCompatActivity
         {
             @Override
             public void onPageCommitVisible(WebView view, String url) {
+                firstWeb.setVisibility(View.VISIBLE);
                 firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('container clearfix')[0].style.display = 'none'; " + "})()");
                 firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
                 //firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                firstWeb.setVisibility(View.GONE);
                 findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
             }
 
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onRefresh() {
                 firstWeb.reload();
+                //Could do : firstWeb.loadUrl( "javascript:window.location.reload( true )" );
                 mySwipeRefresh.setRefreshing(false);
             }
         });
