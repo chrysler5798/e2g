@@ -11,7 +11,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -21,9 +20,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import static android.R.attr.width;
+import org.w3c.dom.Text;
 
 
 public class MainActivity extends AppCompatActivity
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
 
     final String FACEBOOK_URL = "https://www.facebook.com/assoc.eventtogive";
     final String TWITTER_URL = "https://twitter.com/Event2Give";
+    final String LIVE_URL = "http://www.dailymotion.com/video/x4q5kra_fr-programmation-culturelle-hebdomadaire-streamteame2g_videogames";
 
     private DrawerLayout mDrawerLayout;
 
@@ -120,7 +121,13 @@ public class MainActivity extends AppCompatActivity
         animation.setRepeatCount(Animation.INFINITE); // Repeat animation infinitely
         animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
         ImageView logoLive = (ImageView) findViewById(R.id.logoLive);
+        ImageView logoClique = (ImageView) findViewById(R.id.logoDailymotion);
+        TextView textWebTV = (TextView) findViewById(R.id.textViewWebTV);
         logoLive.startAnimation(animation);
+        logoLive.setOnClickListener(new LiveClickListener());
+        logoClique.setOnClickListener(new LiveClickListener());
+        textWebTV.setOnClickListener(new LiveClickListener());
+
     }
 
 
@@ -168,6 +175,13 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+        class LiveClickListener implements View.OnClickListener {
+
+            @Override
+            public void onClick(View view) {
+                firstWeb.loadUrl("http://dai.ly/x4q5kra");
+            }
+        }
         class DrawerItemClickListener implements ListView.OnItemClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
