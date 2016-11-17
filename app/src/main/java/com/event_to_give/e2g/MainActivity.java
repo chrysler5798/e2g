@@ -11,11 +11,19 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import static android.R.attr.width;
 
 
 public class MainActivity extends AppCompatActivity
@@ -28,8 +36,6 @@ public class MainActivity extends AppCompatActivity
     final String FACEBOOK_URL = "https://www.facebook.com/assoc.eventtogive";
     final String TWITTER_URL = "https://twitter.com/Event2Give";
 
-    private String[] mMenuTitles;
-    private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -37,6 +43,9 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ListView mDrawerList;
+        String[] mMenuTitles;
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -104,6 +113,14 @@ public class MainActivity extends AppCompatActivity
                 mySwipeRefresh.setRefreshing(false);
             }
         });
+
+        final Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
+        animation.setDuration(500); // duration - half a second
+        animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation.setRepeatCount(Animation.INFINITE); // Repeat animation infinitely
+        animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
+        ImageView logoLive = (ImageView) findViewById(R.id.logoLive);
+        logoLive.startAnimation(animation);
     }
 
 
