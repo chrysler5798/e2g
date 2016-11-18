@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onPageCommitVisible(WebView view, String url) {
                 firstWeb.setVisibility(View.VISIBLE);
+                mySwipeRefresh.setRefreshing(false);
                 firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('container clearfix')[0].style.display = 'none'; " + "})()");
                 firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
                 //firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
@@ -110,8 +111,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onRefresh() {
                 firstWeb.reload();
-                //Could do : firstWeb.loadUrl( "javascript:window.location.reload( true )" );
-                mySwipeRefresh.setRefreshing(false);
+                //A noter : firstWeb.loadUrl( "javascript:window.location.reload( true )" );
             }
         });
 
@@ -127,6 +127,14 @@ public class MainActivity extends AppCompatActivity
         logoLive.setOnClickListener(new LiveClickListener());
         logoClique.setOnClickListener(new LiveClickListener());
         textWebTV.setOnClickListener(new LiveClickListener());
+
+
+        RelativeLayout liveLayout = (RelativeLayout) findViewById(R.id.LiveLayout);
+        LiveClass LiveC = new LiveClass();
+        LiveC.showPlanning(textWebTV, liveLayout, mySwipeRefresh);
+
+
+
 
     }
 
