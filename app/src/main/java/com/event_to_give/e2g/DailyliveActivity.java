@@ -3,6 +3,7 @@ package com.event_to_give.e2g;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -17,15 +18,16 @@ public class DailyliveActivity extends Activity
 {
 
     private DMWebVideoView mVideoView;
-    private WebView mChatView;
-    private final String STREAM_ID = "x4q5kra_fr-programmation-culturelle-hebdomadaire-streamteame2g_videogames";
-    private final String CHAT_URL = "http://live-chat.dmcdn.net/#event2give/x4q5kra";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_daily);
+
+        WebView mChatView;
+        final String STREAM_ID = "x4q5kra_fr-programmation-culturelle-hebdomadaire-streamteame2g_videogames";
+        final String CHAT_URL = "http://live-chat.dmcdn.net/#event2give/x4q5kra";
 
         mVideoView = (DMWebVideoView) findViewById(R.id.dmWebVideoView);
         mChatView = (WebView) findViewById(R.id.chatView);
@@ -35,13 +37,14 @@ public class DailyliveActivity extends Activity
 
         mVideoView.setEventListener(new DMWebVideoView.Listener()
         {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onEvent(String event)
             {
                 switch (event)
                 {
                     case "fullscreenchange":
-                        if(mVideoView.fullscreen == true)
+                        if(mVideoView.fullscreen)
                         {
                             hideNavigationBar();
                         }
@@ -91,6 +94,7 @@ public class DailyliveActivity extends Activity
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void hideNavigationBar()
     {
         View decorView = getWindow().getDecorView();

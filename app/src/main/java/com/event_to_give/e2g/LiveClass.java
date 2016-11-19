@@ -7,6 +7,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by Louis on 17/11/2016.
@@ -14,20 +15,20 @@ import java.util.Date;
  * e2g
  */
 
-public class LiveClass {
+class LiveClass {
 
-    Calendar c = Calendar.getInstance();
+    private Calendar c = Calendar.getInstance();
 
         //    SimpleDateFormat Sdf = new SimpleDateFormat("u/H", Locale.FRANCE);
         //    String strDate = Sdf.format(c.getTime());
         //    String[] values = strDate.split("/",0);
-        int heure = c.get(Calendar.HOUR_OF_DAY);
+        private int heure = c.get(Calendar.HOUR_OF_DAY);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
-        Date d = new Date();
-        String dayOfTheWeek = sdf.format(d);
+        private SimpleDateFormat sdf = new SimpleDateFormat("EEEE", Locale.FRANCE);
+        private Date d = new Date();
+        private String dayOfTheWeek = sdf.format(d);
 
-    public void showPlanning(TextView textV, RelativeLayout rvOff, SwipeRefreshLayout swipeOff)
+    void showPlanning(TextView textV, RelativeLayout rvOff, SwipeRefreshLayout swipeOff)
     {
         switch (dayOfTheWeek) {
             case "Monday":

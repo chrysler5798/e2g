@@ -24,8 +24,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
-
 
 public class MainActivity extends AppCompatActivity
 {
@@ -39,7 +37,6 @@ public class MainActivity extends AppCompatActivity
 
     final String FACEBOOK_URL = "https://www.facebook.com/assoc.eventtogive";
     final String TWITTER_URL = "https://twitter.com/Event2Give";
-    final String LIVE_URL = "http://www.dailymotion.com/video/x4q5kra_fr-programmation-culturelle-hebdomadaire-streamteame2g_videogames";
 
     private DrawerLayout mDrawerLayout;
 
@@ -52,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         ListView mDrawerList;
         String[] mMenuTitles;
 
-        LiveC = new LiveClass();;
+        LiveC = new LiveClass();
         textWebTV = (TextView) findViewById(R.id.textViewWebTV);
         liveLayout = (RelativeLayout) findViewById(R.id.LiveLayout);
 
