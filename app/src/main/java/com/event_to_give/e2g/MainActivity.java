@@ -1,5 +1,6 @@
 package com.event_to_give.e2g;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,15 +24,18 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.L;
 
 
 public class MainActivity extends AppCompatActivity
 {
 
     WebView firstWeb;
-
+    LiveClass LiveC;
+    TextView textWebTV;
+    RelativeLayout liveLayout;
     SwipeRefreshLayout mySwipeRefresh;
+    Intent intentLive;
 
     final String FACEBOOK_URL = "https://www.facebook.com/assoc.eventtogive";
     final String TWITTER_URL = "https://twitter.com/Event2Give";
@@ -47,6 +51,10 @@ public class MainActivity extends AppCompatActivity
 
         ListView mDrawerList;
         String[] mMenuTitles;
+
+        LiveC = new LiveClass();;
+        textWebTV = (TextView) findViewById(R.id.textViewWebTV);
+        liveLayout = (RelativeLayout) findViewById(R.id.LiveLayout);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -111,6 +119,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onRefresh() {
                 firstWeb.reload();
+                LiveC.showPlanning(textWebTV, liveLayout, mySwipeRefresh);
                 //A noter : firstWeb.loadUrl( "javascript:window.location.reload( true )" );
             }
         });
@@ -122,20 +131,15 @@ public class MainActivity extends AppCompatActivity
         animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
         ImageView logoLive = (ImageView) findViewById(R.id.logoLive);
         ImageView logoClique = (ImageView) findViewById(R.id.logoDailymotion);
-        TextView textWebTV = (TextView) findViewById(R.id.textViewWebTV);
+
         logoLive.startAnimation(animation);
         logoLive.setOnClickListener(new LiveClickListener());
         logoClique.setOnClickListener(new LiveClickListener());
         textWebTV.setOnClickListener(new LiveClickListener());
 
-
-        RelativeLayout liveLayout = (RelativeLayout) findViewById(R.id.LiveLayout);
-        LiveClass LiveC = new LiveClass();
         LiveC.showPlanning(textWebTV, liveLayout, mySwipeRefresh);
 
-
-
-
+        intentLive = new Intent(this, DailyliveActivity.class);
     }
 
 
@@ -187,7 +191,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onClick(View view) {
-                firstWeb.loadUrl("http://dai.ly/x4q5kra");
+                startActivity(intentLive);
             }
         }
         class DrawerItemClickListener implements ListView.OnItemClickListener {

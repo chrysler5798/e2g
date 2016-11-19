@@ -7,10 +7,6 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-
-import static android.R.attr.text;
-import static android.R.attr.value;
 
 /**
  * Created by Louis on 17/11/2016.
@@ -22,9 +18,9 @@ public class LiveClass {
 
     Calendar c = Calendar.getInstance();
 
-//    SimpleDateFormat Sdf = new SimpleDateFormat("u/H", Locale.FRANCE);
-//    String strDate = Sdf.format(c.getTime());
-//    String[] values = strDate.split("/",0);
+        //    SimpleDateFormat Sdf = new SimpleDateFormat("u/H", Locale.FRANCE);
+        //    String strDate = Sdf.format(c.getTime());
+        //    String[] values = strDate.split("/",0);
         int heure = c.get(Calendar.HOUR_OF_DAY);
 
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
@@ -33,7 +29,6 @@ public class LiveClass {
 
     public void showPlanning(TextView textV, RelativeLayout rvOff, SwipeRefreshLayout swipeOff)
     {
-        String hourStr = String.valueOf(heure);
         switch (dayOfTheWeek) {
             case "Monday":
                 if(heure >= 8)
