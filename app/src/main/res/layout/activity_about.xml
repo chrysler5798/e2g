@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar_about"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="116dp"
+        app:srcCompat="@drawable/logo_splash"
+        android:id="@+id/imageView3"
+        android:adjustViewBounds="true"
+        android:layout_weight="0.13"
+        android:contentDescription="@string/logo_e2g_cd"/>
+
+    <TextView
+        android:text="@string/about_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:layout_weight="0.11"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:text="@string/about_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:layout_weight="0.48"
+        android:gravity="bottom" />
+
+</LinearLayout>

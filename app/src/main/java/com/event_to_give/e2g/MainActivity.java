@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     SwipeRefreshLayout mySwipeRefresh;
     Intent intentLive;
 
+    final String WEBSITE_URL = "http://www.event-to-give.com/";
     final String FACEBOOK_URL = "https://www.facebook.com/assoc.eventtogive";
     final String TWITTER_URL = "https://twitter.com/Event2Give";
 
@@ -48,26 +49,33 @@ public class MainActivity extends AppCompatActivity
 
         ListView mDrawerList;
         String[] mMenuTitles;
+        ImageView logoLive;
+        ImageView logoClique;
+        Toolbar myToolbar;
 
         LiveC = new LiveClass();
+
         textWebTV = (TextView) findViewById(R.id.textViewWebTV);
         liveLayout = (RelativeLayout) findViewById(R.id.LiveLayout);
+        logoLive = (ImageView) findViewById(R.id.logoLive);
+        logoClique = (ImageView) findViewById(R.id.logoDailymotion);
+        myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        firstWeb = (WebView) findViewById(R.id.webView1);
+        mySwipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        myToolbar.setTitle("Event To Give");
+        myToolbar.setTitle(R.string.e2g_fullname);
         myToolbar.setNavigationIcon(R.drawable.ic_list_black_24dp);
         setSupportActionBar(myToolbar);
 
         mMenuTitles = getResources().getStringArray(R.array.menu_arrays);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, mMenuTitles));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-        firstWeb = (WebView) findViewById(R.id.webView1);
 
         firstWeb.getSettings().setJavaScriptEnabled(true);
 
@@ -76,10 +84,8 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onPageCommitVisible(WebView view, String url) {
                 firstWeb.setVisibility(View.VISIBLE);
+                removeElementsJS(firstWeb);
                 mySwipeRefresh.setRefreshing(false);
-                firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('container clearfix')[0].style.display = 'none'; " + "})()");
-                firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
-                //firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
             }
 
             @Override
@@ -90,7 +96,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onPageFinished(WebView view, String url) {
-                firstWeb.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
+                removeElementsJS(firstWeb);
                 findViewById(R.id.loadingPanel).setVisibility(View.GONE);
             }
 
@@ -106,11 +112,15 @@ public class MainActivity extends AppCompatActivity
                 }
                 super.onReceivedError(view, errorCode, description, failingUrl);
             }
+
+            private void removeElementsJS (WebView wv)
+            {
+                wv.loadUrl("javascript:(function() { " + "document.getElementsByClassName('container clearfix')[0].style.display = 'none'; " + "})()");
+                wv.loadUrl("javascript:(function() { " + "document.getElementsByClassName('mainnav-toggle')[0].style.display = 'none'; " + "})()");
+            }
         });
 
-        firstWeb.loadUrl("http://www.event-to-give.com/");
-
-        mySwipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        firstWeb.loadUrl(WEBSITE_URL);
 
         mySwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -126,10 +136,9 @@ public class MainActivity extends AppCompatActivity
         animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
         animation.setRepeatCount(Animation.INFINITE); // Repeat animation infinitely
         animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
-        ImageView logoLive = (ImageView) findViewById(R.id.logoLive);
-        ImageView logoClique = (ImageView) findViewById(R.id.logoDailymotion);
 
         logoLive.startAnimation(animation);
+
         logoLive.setOnClickListener(new LiveClickListener());
         logoClique.setOnClickListener(new LiveClickListener());
         textWebTV.setOnClickListener(new LiveClickListener());
@@ -179,6 +188,10 @@ public class MainActivity extends AppCompatActivity
                 case R.id.action_twitter:
                     firstWeb.loadUrl(TWITTER_URL);
                     return true;
+                case R.id.action_about:
+                    Intent intentAbout = new Intent(MainActivity.this,AboutActivity.class);
+                    startActivity(intentAbout);
+                    return true;
                 default:
                     return super.onOptionsItemSelected(item);
             }
@@ -200,7 +213,7 @@ public class MainActivity extends AppCompatActivity
             private void selectItem(int position) {
                 switch (position) {
                     case 0:
-                        loadUrlandClose("http://www.event-to-give.com/");
+                        loadUrlandClose(WEBSITE_URL);
                         break;
                     case 1:
                         loadUrlandClose("http://www.event-to-give.com/?page_id=8");

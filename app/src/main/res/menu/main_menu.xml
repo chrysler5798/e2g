@@ -3,22 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_about"
         android:orderInCategory="100"
         android:title="@string/apropos"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_facebook"
         android:orderInCategory="200"
-        android:title="Facebook"
+        android:title="@string/facebook"
         android:icon="@drawable/facebook"
-        app:showAsAction="ifRoom"
-    ></item>
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_twitter"
         android:orderInCategory="300"
-        android:title="Twitter"
+        android:title="@string/twitter"
         android:icon="@drawable/twitter"
-        app:showAsAction="ifRoom"></item>
+        app:showAsAction="ifRoom"/>
 
 </menu>
