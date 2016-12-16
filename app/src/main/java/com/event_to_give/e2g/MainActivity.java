@@ -39,6 +39,16 @@ public class MainActivity extends AppCompatActivity
     final String FACEBOOK_URL = "https://www.facebook.com/assoc.eventtogive";
     final String TWITTER_URL = "https://twitter.com/Event2Give";
 
+    final String ASSOC_URL = "http://www.event-to-give.com/?page_id=8";
+    final String EVENT_URL = "http://www.event-to-give.com/?page_id=80";
+    final String PART_URL = "http://www.event-to-give.com/?page_id=86";
+    final String CLUB_URL = "http://www.event-to-give.com/?page_id=2192";
+    final String SERVICE_URL = "http://www.event-to-give.com/?page_id=76";
+    final String EQUIPE_URL = "http://www.event-to-give.com/?page_id=364";
+    final String PROG_URL = "http://www.event-to-give.com/?page_id=2356";
+    final String GALERIE_URL = "http://www.event-to-give.com/?page_id=88";
+    final String CONTACT_URL = "http://www.event-to-give.com/?page_id=114";
+
     private DrawerLayout mDrawerLayout;
 
     @Override
@@ -131,11 +141,11 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        final Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
-        animation.setDuration(500); // duration - half a second
-        animation.setInterpolator(new LinearInterpolator()); // do not alter animation rate
-        animation.setRepeatCount(Animation.INFINITE); // Repeat animation infinitely
-        animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the end so the button will fade back in
+        final Animation animation = new AlphaAnimation(1, 0);
+        animation.setDuration(500);
+        animation.setInterpolator(new LinearInterpolator());
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setRepeatMode(Animation.REVERSE);
 
         logoLive.startAnimation(animation);
 
@@ -216,31 +226,31 @@ public class MainActivity extends AppCompatActivity
                         loadUrlandClose(WEBSITE_URL);
                         break;
                     case 1:
-                        loadUrlandClose("http://www.event-to-give.com/?page_id=8");
+                        loadUrlandClose(ASSOC_URL);
                         break;
                     case 2:
-                        loadUrlandClose("http://www.event-to-give.com/?page_id=80");
+                        loadUrlandClose(EVENT_URL);
                         break;
                     case 3:
-                        loadUrlandClose("http://www.event-to-give.com/?page_id=86");
+                        loadUrlandClose(PART_URL);
                         break;
                     case 4:
-                        loadUrlandClose("http://www.event-to-give.com/?page_id=2192");
+                        loadUrlandClose(CLUB_URL);
                         break;
                     case 5:
-                        loadUrlandClose("http://www.event-to-give.com/?page_id=76");
+                        loadUrlandClose(SERVICE_URL);
                         break;
                     case 6:
-                        loadUrlandClose("http://www.event-to-give.com/?page_id=364");
+                        loadUrlandClose(EQUIPE_URL);
                         break;
                     case 7:
-                        loadUrlandClose("http://www.event-to-give.com/?page_id=2356");
+                        loadUrlandClose(PROG_URL);
                         break;
                     case 8:
-                        loadUrlandClose("http://www.event-to-give.com/?page_id=88");
+                        loadUrlandClose(GALERIE_URL);
                         break;
                     case 9:
-                        loadUrlandClose("http://www.event-to-give.com/?page_id=114");
+                        loadUrlandClose(CONTACT_URL);
                         break;
                     default:
                 }
