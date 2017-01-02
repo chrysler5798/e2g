@@ -16,7 +16,8 @@
         android:id="@+id/loadingPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        >
 
         <ProgressBar
             android:layout_width="match_parent"
@@ -24,8 +25,8 @@
             android:indeterminate="true"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:id="@+id/loader"
-            android:layout_marginBottom="-4dp"
-            android:layout_marginTop="-4dp"
+            android:layout_marginBottom="-6dp"
+            android:layout_marginTop="-6dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -74,6 +75,7 @@
                 android:layout_width="wrap_content"
                 android:id="@+id/surfaceView"
                 android:layout_toRightOf="@+id/logoLive"
+                android:layout_toEndOf="@+id/logoLive"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:background="#0066dc"

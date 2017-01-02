@@ -32,13 +32,10 @@
         </activity>
 
 
-        <activity android:name=".DailyliveActivity"
-            android:configChanges="orientation|screenSize">
-        </activity>
+        <activity android:name=".DailyliveActivity" />
 
 
-        <activity android:name=".AboutActivity">
-        </activity>
+        <activity android:name=".AboutActivity" />
 
     </application>
 

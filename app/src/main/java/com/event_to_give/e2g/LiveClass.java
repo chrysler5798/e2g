@@ -33,42 +33,31 @@ class LiveClass {
             case "Monday":
                 if(heure >= 8)
                 {
-                    if(heure == 17)
+                    if(heure == 8 || heure == 9 || heure == 13 || heure == 14 || heure == 15 || heure == 16 || heure == 17)
                     {
                         //STREAM OFF
                         streamOff(rvOff, swipeOff);
                     }
 
-                    //STREAM ON
-                    if(heure == 8 || heure == 9)
-                    {
-                        //STREAM DE EMERALD
-                        textV.setText("WebTV : 8H-10H\nEMERALD\nsur CSGO");
-                    }
-                    else if (heure == 10 || heure == 11 || heure == 12)
+                    if (heure == 10 || heure == 11 || heure == 12)
                     {
                         //STREAM JAWAN
                         textV.setText("WebTV : 10H-13H\nJAWAN\nsur HOTS");
                     }
-                    else if (heure == 13 || heure == 14)
+                    else if (heure == 18 || heure == 19)
                     {
-                        //STREAM KHRYS
-                        textV.setText("WebTV : 13H-15H\nKHRYS\nsur CSGO");
+                        //STREAM D4NTE
+                        textV.setText("WebTV : 18H-20H\nD4NTE\nsur Titan Fall");
                     }
-                    else if (heure == 15 || heure == 16)
-                    {
-                        //STREAM ALKA
-                        textV.setText("WebTV : 15H-17H\nALKA\nsur The Elder Scrolls");
-                    }
-                    else if (heure == 18 || heure == 19 || heure == 20 || heure == 21)
+                    else if (heure == 20 || heure == 21)
                     {
                         //STREAM XANXS
-                        textV.setText("WebTV : 18H-22H\nXANXS\nsur HOTS");
+                        textV.setText("WebTV : 20H-22H\nXANXS\nsur STYX");
                     }
                     else if (heure == 22 || heure == 23)
                     {
-                        //STREAM NERO
-                        textV.setText("WebTV : 22H-00H\nNERODITH\nsur STYX");
+                        //STREAM XANXS
+                        textV.setText("WebTV : 22H-00H\nXANXS\nsur STYX");
                     }
                 } else {
                     streamOff(rvOff, swipeOff);
@@ -78,7 +67,7 @@ class LiveClass {
             case "Tuesday":
                 if(heure >= 8)
                 {
-                    if(heure == 13 || heure == 14 || heure == 17)
+                    if(heure == 13 || heure == 14 || heure == 15 || heure == 16 || heure == 17 || heure == 23)
                     {
                         //STREAM OFF
                         streamOff(rvOff, swipeOff);
@@ -87,33 +76,23 @@ class LiveClass {
                     //STREAM ON
                     if(heure == 8 || heure == 9)
                     {
-                        //STREAM DE EMERALD
-                        textV.setText("WebTV : 8H-10H\nEMERALD\nsur CSGO");
+                        //STREAM DE ALKA
+                        textV.setText("WebTV : 8H-10H\nALKA\nsur The Elder Scrolls");
                     }
                     else if (heure == 10 || heure == 11 || heure == 12)
                     {
                         //STREAM JAWAN
                         textV.setText("WebTV : 13H-15H\nJAWAN\nsur HOTS");
                     }
-                    else if (heure == 15 || heure == 16)
-                    {
-                        //STREAM ALKA
-                        textV.setText("WebTV : 15H-17H\nALKA\nsur\nThe Elder Scrolls");
-                    }
                     else if (heure == 18 || heure == 19)
                     {
                         //STREAM ROXY
                         textV.setText("WebTV : 18H-20H\nROXY\nsur CSGO/Battlerite");
                     }
-                    else if(heure == 20 || heure == 21)
+                    else if(heure == 20 || heure == 21 || heure == 22)
                     {
-                        //STREAM XANXS
-                        textV.setText("WebTV : 20H-22H\nXANXS\nsur HOTS");
-                    }
-                    else if (heure == 22 || heure == 23)
-                    {
-                        //STREAM NERO
-                        textV.setText("WebTV : 22H-00H\nNERODITH\nsur STYX");
+                        //STREAM D4NTE
+                        textV.setText("WebTV : 20H-22H\nD4NTE\nsur Titan Fall 2");
                     }
                 } else {
                     streamOff(rvOff, swipeOff);

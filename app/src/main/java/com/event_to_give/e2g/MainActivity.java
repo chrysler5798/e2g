@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity
         firstWeb = (WebView) findViewById(R.id.webView1);
         mySwipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
-        setSupportActionBar(myToolbar);
-
         myToolbar.setTitle(R.string.e2g_fullname);
         myToolbar.setNavigationIcon(R.drawable.ic_list_black_24dp);
         setSupportActionBar(myToolbar);
@@ -86,6 +84,7 @@ public class MainActivity extends AppCompatActivity
 
         mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, mMenuTitles));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        mDrawerList.setItemChecked(0, true);
 
         firstWeb.getSettings().setJavaScriptEnabled(true);
 
@@ -132,9 +131,11 @@ public class MainActivity extends AppCompatActivity
 
         firstWeb.loadUrl(WEBSITE_URL);
 
-        mySwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mySwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
             @Override
-            public void onRefresh() {
+            public void onRefresh()
+            {
                 firstWeb.reload();
                 LiveC.showPlanning(textWebTV, liveLayout, mySwipeRefresh);
                 //A noter : firstWeb.loadUrl( "javascript:window.location.reload( true )" );
@@ -160,13 +161,18 @@ public class MainActivity extends AppCompatActivity
 
 
         @Override
-        public boolean onKeyDown ( int keyCode, KeyEvent event){
-            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+        public boolean onKeyDown ( int keyCode, KeyEvent event)
+        {
+            if (event.getAction() == KeyEvent.ACTION_DOWN)
+            {
                 switch (keyCode) {
                     case KeyEvent.KEYCODE_BACK:
-                        if (firstWeb.canGoBack()) {
+                        if (firstWeb.canGoBack())
+                        {
                             firstWeb.goBack();
-                        } else {
+                        }
+                        else
+                        {
                             finish();
                         }
                         return true;
@@ -207,21 +213,28 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        class LiveClickListener implements View.OnClickListener {
+        class LiveClickListener implements View.OnClickListener
+        {
 
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 startActivity(intentLive);
             }
         }
-        class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+        class DrawerItemClickListener implements ListView.OnItemClickListener
+        {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
                 selectItem(position);
             }
 
-            private void selectItem(int position) {
-                switch (position) {
+            private void selectItem(int position)
+            {
+                switch (position)
+                {
                     case 0:
                         loadUrlandClose(WEBSITE_URL);
                         break;
@@ -256,7 +269,8 @@ public class MainActivity extends AppCompatActivity
                 }
             }
 
-            private void loadUrlandClose(String url) {
+            private void loadUrlandClose(String url)
+            {
                 firstWeb.loadUrl(url);
                 mDrawerLayout.closeDrawers();
             }

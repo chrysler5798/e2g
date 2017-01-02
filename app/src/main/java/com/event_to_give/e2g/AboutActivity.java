@@ -23,6 +23,7 @@ public class AboutActivity extends AppCompatActivity
         Toolbar myToolbar;
 
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar_about);
+        setSupportActionBar(myToolbar);
 
         if (myToolbar != null && getSupportActionBar() != null)
         {

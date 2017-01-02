@@ -1,5 +1,6 @@
 package com.event_to_give.e2g;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,9 +18,12 @@ import android.webkit.WebViewClient;
 public class DailyliveActivity extends Activity
 {
 
+    private int currentApiVersion;
+
     private DMWebVideoView mVideoView;
 
     @Override
+    @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -35,23 +39,35 @@ public class DailyliveActivity extends Activity
         mVideoView.setAutoPlay(true);
         mVideoView.load();
 
-        mVideoView.setEventListener(new DMWebVideoView.Listener()
+        currentApiVersion = android.os.Build.VERSION.SDK_INT;
+
+        final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+
+        if(currentApiVersion >= Build.VERSION_CODES.KITKAT)
         {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onEvent(String event)
-            {
-                switch (event)
-                {
-                    case "fullscreenchange":
-                        if(mVideoView.fullscreen)
+
+            getWindow().getDecorView().setSystemUiVisibility(flags);
+
+            final View decorView = getWindow().getDecorView();
+            decorView
+                    .setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener()
+                    {
+
+                        @Override
+                        public void onSystemUiVisibilityChange(int visibility)
                         {
-                            hideNavigationBar();
+                            if((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0)
+                            {
+                                decorView.setSystemUiVisibility(flags);
+                            }
                         }
-                        break;
-                }
-            }
-        });
+                    });
+        }
 
         mChatView.getSettings().setJavaScriptEnabled(true);
         mChatView.loadUrl(CHAT_URL);
@@ -101,6 +117,23 @@ public class DailyliveActivity extends Activity
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    @Override
+    @SuppressLint("NewApi")
+    public void onWindowFocusChanged(boolean hasFocus)
+    {
+        super.onWindowFocusChanged(hasFocus);
+        if(currentApiVersion >= Build.VERSION_CODES.KITKAT && hasFocus)
+        {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
     }
 
 }

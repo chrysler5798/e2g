@@ -7,7 +7,7 @@
 
     <string name="e2g_about">Event To Give - A propos</string>
     <string name="about_1">Copyright 2009, Event To Give® est la propriété intellectuelle des Associations Loi 1901 \"Sodalis\" , \"MultiGaming family\" et \"Remake Esports\"</string>
-    <string name="about_2">Application Android créée par \nKhrys</string>
+    <string name="about_2">Application Android créée par Khrys</string>
 
     <string-array name="menu_arrays">
         <item>ACCUEIL</item>
@@ -26,9 +26,7 @@
     <string name="logo_live_cd">Live Logo</string>
     <string name="logo_dailymotion_cd">Dailymotion Logo</string>
     <string name="logo_e2g_cd">Event To Give Logo</string>
-
     <string name="drawer_open">Ouvrir</string>
     <string name="drawer_close">Fermer</string>
-
     <string name="apropos">A propos</string>
 </resources>
