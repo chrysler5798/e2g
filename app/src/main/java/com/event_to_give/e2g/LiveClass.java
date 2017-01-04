@@ -1,12 +1,9 @@
 package com.event_to_give.e2g;
 
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by Louis on 17/11/2016.
@@ -14,29 +11,28 @@ import java.util.Date;
  * e2g
  */
 
-class LiveClass {
-
-        private Calendar c = Calendar.getInstance();
-
-        //    SimpleDateFormat Sdf = new SimpleDateFormat("u/H", Locale.FRANCE);
-        //    String strDate = Sdf.format(c.getTime());
-        //    String[] values = strDate.split("/",0);
-        private int heure = c.get(Calendar.HOUR_OF_DAY);
-
-        private SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
-        private Date d = new Date();
-        private String dayOfTheWeek = sdf.format(d);
-
-    void showPlanning(TextView textV, RelativeLayout rvOff, SwipeRefreshLayout swipeOff)
+class LiveClass
+{
+    void showPlanning(TextView textV, LinearLayout lvOff)
     {
-        switch (dayOfTheWeek) {
-            case "Monday":
+        Calendar c = Calendar.getInstance();
+
+        int heure = c.get(Calendar.HOUR_OF_DAY);
+        int day = c.get(Calendar.DAY_OF_WEEK);
+
+        switch (day)
+        {
+            case Calendar.MONDAY:
                 if(heure >= 8)
                 {
                     if(heure == 8 || heure == 9 || heure == 13 || heure == 14 || heure == 15 || heure == 16 || heure == 17)
                     {
                         //STREAM OFF
-                        streamOff(rvOff, swipeOff);
+                        streamOff(lvOff);
+                    }
+                    else
+                    {
+                        lvOff.setVisibility(View.VISIBLE);
                     }
 
                     if (heure == 10 || heure == 11 || heure == 12)
@@ -59,18 +55,25 @@ class LiveClass {
                         //STREAM XANXS
                         textV.setText("WebTV : 22H-00H\nXANXS\nsur STYX");
                     }
-                } else {
-                    streamOff(rvOff, swipeOff);
+                }
+                else
+                {
+                    streamOff(lvOff);
                 }
                 break;
 
-            case "Tuesday":
+            case Calendar.TUESDAY:
                 if(heure >= 8)
                 {
                     if(heure == 13 || heure == 14 || heure == 15 || heure == 16 || heure == 17 || heure == 23)
                     {
                         //STREAM OFF
-                        streamOff(rvOff, swipeOff);
+                        streamOff(lvOff);
+                    }
+                    else
+                    {
+                        //STREAM ON
+                        lvOff.setVisibility(View.VISIBLE);
                     }
 
                     //STREAM ON
@@ -82,7 +85,12 @@ class LiveClass {
                     else if (heure == 10 || heure == 11 || heure == 12)
                     {
                         //STREAM JAWAN
-                        textV.setText("WebTV : 13H-15H\nJAWAN\nsur HOTS");
+                        textV.setText("WebTV : 10H-13H\nJAWAN\nsur HOTS");
+                    }
+                    else if (heure == 15 || heure == 16)
+                    {
+                        //STREAM CROWNED
+                        textV.setText("WebTV : 15H-17H\nCROWNED\nsur Overwatch");
                     }
                     else if (heure == 18 || heure == 19)
                     {
@@ -92,14 +100,16 @@ class LiveClass {
                     else if(heure == 20 || heure == 21 || heure == 22)
                     {
                         //STREAM D4NTE
-                        textV.setText("WebTV : 20H-22H\nD4NTE\nsur Titan Fall 2");
+                        textV.setText("WebTV : 20H-23H\nD4NTE\nsur Titan Fall 2");
                     }
-                } else {
-                    streamOff(rvOff, swipeOff);
+                }
+                else
+                {
+                    streamOff(lvOff);
                 }
                 break;
 
-            case "Wednesday":
+            case Calendar.WEDNESDAY:
                 if(heure >= 10)
                 {
                     //STREAM ON
@@ -139,11 +149,11 @@ class LiveClass {
                         textV.setText("WebTV : 22H-00H\nNERODITH\nsur STYX");
                     }
                 } else {
-                    streamOff(rvOff, swipeOff);
+                    streamOff(lvOff);
                 }
                 break;
 
-            case "Thursday":
+            case Calendar.THURSDAY:
                 if(heure >= 8)
                 {
                     if(heure == 8 || heure == 9)
@@ -187,11 +197,11 @@ class LiveClass {
                         textV.setText("WebTV : 22H-00H\nNERODITH\nsur STYX");
                     }
                 } else {
-                    streamOff(rvOff, swipeOff);
+                    streamOff(lvOff);
                 }
                 break;
 
-            case "Friday":
+            case Calendar.FRIDAY:
                 if(heure >= 10)
                 {
                     if (heure == 10 || heure == 11 || heure == 12)
@@ -230,17 +240,17 @@ class LiveClass {
                         textV.setText("WebTV : 22H-00H\nNERODITH\nsur STYX");
                     }
                 } else {
-                    streamOff(rvOff, swipeOff);
+                    streamOff(lvOff);
                 }
                 break;
 
-            case "Saturday":
+            case Calendar.SATURDAY:
                 if(heure >= 8)
                 {
                     if (heure == 11 || heure == 12)
                     {
                         //STREAM OFF
-                        streamOff(rvOff, swipeOff);
+                        streamOff(lvOff);
                     }
 
                     //STREAM ON
@@ -281,17 +291,17 @@ class LiveClass {
                     }
                 } else
                 {
-                    streamOff(rvOff, swipeOff);
+                    streamOff(lvOff);
                 }
                 break;
 
-            case "Sunday":
+            case Calendar.SUNDAY:
                 if(heure >= 8)
                 {
                     if (heure == 11 || heure == 12 || heure == 17 || heure == 22 || heure == 23)
                     {
                         //STREAM OFF
-                        streamOff(rvOff, swipeOff);
+                        streamOff(lvOff);
                     }
 
                     //STREAM ON
@@ -322,14 +332,14 @@ class LiveClass {
                     }
                 } else
                 {
-                    streamOff(rvOff, swipeOff);
+                    streamOff(lvOff);
                 }
                 break;
         }
     }
 
-    private void streamOff(RelativeLayout rvOff, SwipeRefreshLayout swipeOff){
-        rvOff.setVisibility(View.GONE);
-        swipeOff.setPadding(0,0,0,0);
+    private void streamOff(LinearLayout lvOff)
+    {
+        lvOff.setVisibility(View.GONE);
     }
 }

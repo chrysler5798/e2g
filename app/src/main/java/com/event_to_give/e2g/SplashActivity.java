@@ -16,23 +16,30 @@ import android.widget.TextView;
  * e2g
  */
 
-public class SplashActivity extends Activity{
-    public void onAttachedToWindow() {
+public class SplashActivity extends Activity
+{
+    Thread splashTread;
+
+    public void onAttachedToWindow()
+    {
         super.onAttachedToWindow();
         Window window = getWindow();
         window.setFormat(PixelFormat.RGBA_8888);
     }
-    Thread splashTread;
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         StartAnimations();
     }
-    private void StartAnimations() {
+
+    private void StartAnimations()
+    {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
         anim.reset();
-        RelativeLayout l=(RelativeLayout) findViewById(R.id.lin_lay);
+        RelativeLayout l=(RelativeLayout) findViewById(R.id.layout);
         l.clearAnimation();
         l.startAnimation(anim);
 
@@ -45,13 +52,16 @@ public class SplashActivity extends Activity{
         iv2.clearAnimation();
         iv2.startAnimation(anim);
 
-        splashTread = new Thread() {
+        splashTread = new Thread()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
                 try {
                     int waited = 0;
                     // Splash screen pause time
-                    while (waited < 3500) {
+                    while (waited < 3500)
+                    {
                         sleep(100);
                         waited += 100;
                     }
@@ -60,15 +70,18 @@ public class SplashActivity extends Activity{
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                     SplashActivity.this.finish();
-                } catch (InterruptedException e) {
+                }
+                catch (InterruptedException e)
+                {
                     // do nothing
-                } finally {
+                }
+                finally
+                {
                     SplashActivity.this.finish();
                 }
 
             }
         };
         splashTread.start();
-
     }
 }

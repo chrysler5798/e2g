@@ -5,13 +5,14 @@
 
     <com.event_to_give.e2g.DMWebVideoView
         android:layout_width="match_parent"
-        android:layout_height="200dip"
+        android:layout_height="match_parent"
         android:id="@+id/dmWebVideoView"
-        />
+        android:layout_weight="1" />
 
     <WebView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/chatView"/>
+        android:id="@+id/chatView"
+        android:layout_weight="1" />
 
 </LinearLayout>

@@ -2,17 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/lin_lay">
+    android:id="@+id/layout">
 
     <TextView
-        android:text="Jouer, votre Passion"
+        android:text="@string/splashtxt1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView1"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textSize="36sp"
         android:textAlignment="center"
-        android:fontFamily="sans-serif"
         android:textStyle="normal|italic"
         android:textColor="?attr/editTextColor"
         android:layout_above="@+id/textView2"
@@ -20,7 +19,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="Offrir, notre Conviction !"
+        android:text="@string/splashtxt2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
@@ -39,7 +38,7 @@
         android:src="@drawable/logo_splash"
         android:id="@+id/imageView"
         android:adjustViewBounds="true"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="40dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

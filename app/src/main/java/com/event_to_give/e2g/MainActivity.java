@@ -20,8 +20,8 @@ import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity
     WebView firstWeb;
     LiveClass LiveC;
     TextView textWebTV;
-    RelativeLayout liveLayout;
+    LinearLayout liveLayout;
     SwipeRefreshLayout mySwipeRefresh;
     Intent intentLive;
 
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         LiveC = new LiveClass();
 
         textWebTV = (TextView) findViewById(R.id.textViewWebTV);
-        liveLayout = (RelativeLayout) findViewById(R.id.LiveLayout);
+        liveLayout = (LinearLayout) findViewById(R.id.liveLayout);
         logoLive = (ImageView) findViewById(R.id.logoLive);
         logoClique = (ImageView) findViewById(R.id.logoDailymotion);
         myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -100,13 +100,13 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 firstWeb.setVisibility(View.GONE);
-                findViewById(R.id.loadingPanel).setVisibility(View.VISIBLE);
+                findViewById(R.id.loader).setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 removeElementsJS(firstWeb);
-                findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+                findViewById(R.id.loader).setVisibility(View.GONE);
             }
 
             @Override
@@ -137,13 +137,13 @@ public class MainActivity extends AppCompatActivity
             public void onRefresh()
             {
                 firstWeb.reload();
-                LiveC.showPlanning(textWebTV, liveLayout, mySwipeRefresh);
+                LiveC.showPlanning(textWebTV, liveLayout);
                 //A noter : firstWeb.loadUrl( "javascript:window.location.reload( true )" );
             }
         });
 
         final Animation animation = new AlphaAnimation(1, 0);
-        animation.setDuration(500);
+        animation.setDuration(1000);
         animation.setInterpolator(new LinearInterpolator());
         animation.setRepeatCount(Animation.INFINITE);
         animation.setRepeatMode(Animation.REVERSE);
@@ -154,35 +154,41 @@ public class MainActivity extends AppCompatActivity
         logoClique.setOnClickListener(new LiveClickListener());
         textWebTV.setOnClickListener(new LiveClickListener());
 
-        LiveC.showPlanning(textWebTV, liveLayout, mySwipeRefresh);
+        LiveC.showPlanning(textWebTV, liveLayout);
 
         intentLive = new Intent(this, DailyliveActivity.class);
     }
 
+    @Override
+    public void onResume()
+    {
+        super.onResume();
 
-        @Override
-        public boolean onKeyDown ( int keyCode, KeyEvent event)
+        LiveC.showPlanning(textWebTV, liveLayout);
+    }
+
+    @Override
+    public boolean onKeyDown ( int keyCode, KeyEvent event)
+    {
+        if (event.getAction() == KeyEvent.ACTION_DOWN)
         {
-            if (event.getAction() == KeyEvent.ACTION_DOWN)
-            {
-                switch (keyCode) {
-                    case KeyEvent.KEYCODE_BACK:
-                        if (firstWeb.canGoBack())
-                        {
-                            firstWeb.goBack();
-                        }
-                        else
-                        {
-                            finish();
-                        }
-                        return true;
-                }
-
+            switch (keyCode) {
+                case KeyEvent.KEYCODE_BACK:
+                    if (firstWeb.canGoBack())
+                    {
+                        firstWeb.goBack();
+                    }
+                    else
+                    {
+                        finish();
+                    }
+                    return true;
             }
-            return super.onKeyDown(keyCode, event);
         }
+            return super.onKeyDown(keyCode, event);
+    }
 
-        @Override
+    @Override
         public boolean onCreateOptionsMenu (Menu menu)
         {
             // Inflate the menu; this adds items to the action bar if it is present.
@@ -196,7 +202,15 @@ public class MainActivity extends AppCompatActivity
             switch (item.getItemId())
             {
                 case android.R.id.home:
-                    mDrawerLayout.openDrawer(GravityCompat.START);
+                    if(mDrawerLayout.isDrawerOpen(GravityCompat.START))
+                    {
+                        mDrawerLayout.closeDrawers();
+                    }
+                    else
+                    {
+                        mDrawerLayout.openDrawer(GravityCompat.START);
+                    }
+
                     return true;
                 case R.id.action_facebook:
                     firstWeb.loadUrl(FACEBOOK_URL);

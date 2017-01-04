@@ -3,4 +3,5 @@
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#151515</color>
     <color name="colorAccent">#82DE13</color>
+    <color name="colorBannerLive">#0066dc</color>
 </resources>
